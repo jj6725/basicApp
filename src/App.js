@@ -3,6 +3,10 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 import './App.css';
 
 class App extends Component {
+
+  submitClick() {
+
+  }
   render() {
     return (
       <div className="container">
@@ -22,7 +26,7 @@ class App extends Component {
         <br/><br/><br/>
       </form>
 
-      <Link to="404" className="btn btn-default" role="button">or Register</Link>
+      <Link to="Register" className="btn btn-default" role="button">or Register</Link>
       </div>
       );
   }
