@@ -17,7 +17,7 @@ class Residency extends Component {
       status: event.target.value
     });
 
-    if(this.state.status==="nonResident"){
+    if(event.target.value==="nonResident"){
       this.setState({
         showInt: true,
         showSocial: false
@@ -37,9 +37,7 @@ class Residency extends Component {
           <div className="panel-body">
             <div className="row">
 
-              <div className="col-md-2">
-                <a href="contactDetails.html"><span className="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
-              </div>
+              <div className="col-md-1"></div>
 
               <div className="col-md-8">
                 <h1>Residency Status</h1>
@@ -98,8 +96,6 @@ class Residency extends Component {
                 
                 </form>
               </div>
-
-              <div className="col-md-2"><span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
             </div>
           </div>
         </div>

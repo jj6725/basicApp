@@ -36,30 +36,24 @@ class StudentForm extends Component {
   render() {
     return (
       <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-body">
-            
-            {(() => {
-              switch(this.state.currIdx){
-                case 0:
-                  return <Residency/>
-                case 1:
-                  return <MaritalStatus/>
-                case 2:
-                  return <BasicInformation/>
-              }
-            })()}
+        <h1 className="text-center">Student Form</h1>
+          {(() => {
+            switch(this.state.currIdx){
+              case 0:
+                return <Residency/>
+              case 1:
+                return <MaritalStatus/>
+              case 2:
+                return <BasicInformation/>
+            }
+          })()}
 
-            <div className="row">
-              <div className="text-center">
-                <button onClick={this.prevClick}><span className="glyphicon glyphicon-menu-left" aria-hidden="true"></span></button>
-                <button onClick={this.nextClick}><span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
-              </div>
+          <div className="row">
+            <div className="text-center">
+              <button onClick={this.prevClick}><span className="glyphicon glyphicon-menu-left" aria-hidden="true"></span></button>
+              <button onClick={this.nextClick}><span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
             </div>
-
           </div>
-        </div>
-
       </div>
       );
   }
