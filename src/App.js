@@ -1,35 +1,60 @@
-import React, { Component } from 'react';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import React, { Component,PropTypes } from 'react';
+import { Link } from 'react-router'
+import classNames from "classnames/bind";
 import './App.css';
+import Header from "./Header"
+import lightBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import {TextField,RaisedButton,Divider} from 'material-ui';
+import Styles from "./css/Default.css"
+
+const cx = classNames.bind(Styles)
 
 class App extends Component {
+  getChildContext() {
+    return {muiTheme: getMuiTheme(lightBaseTheme)}
+  };
 
-  submitClick() {
-
-  }
   render() {
     return (
-      <div className="container">
-      <h1>Login Page</h1>
+      <div>
+        <Header/>
+        <div className={cx('card','container')}>
+          <div className="row">
+            <div className="col-md-8 col-md-offset-1">
+              <h1>Login</h1>
+              <TextField
+                hintText="abc@xzy.com"
+                floatingLabelText="Email Address"
+                type="username"
+              /><br/>
+              <TextField
+                hintText="Password"
+                floatingLabelText="Password"
+                type="password"
+              /><br/>
+              <Link to="studentform">
+                <RaisedButton label="Login" primary={true} />
+              </Link>
 
-      <form>
-        <div className="form-group">
-          <label form="email">Email address</label>
-          <input type="email" className="form-control" id="email" placeholder="Email"/>
+              <br/>
+              <br/>
+              <br/>
+              <Divider/>
+              <h3>No account?</h3>
+              <Link to="register">
+                <RaisedButton label="Register" secondary={true}/>
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label form="password">Password</label>
-          <input type="password" className="form-control" id="password" placeholder="Password"/>
-        </div>
-
-        <button type="submit" className="btn btn-default">Submit</button>
-        <br/><br/><br/>
-      </form>
-
-      <Link to="Register" className="btn btn-default" role="button">or Register</Link>
       </div>
       );
   }
 }
+
+App.childContextTypes={
+  muiTheme: PropTypes.object.isRequired
+};
 
 export default App;

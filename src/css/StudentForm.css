@@ -1,0 +1,12 @@
+.main {
+	min-height:35em;
+}
+
+.spacing {
+	min-height:25em;
+}
+
+.padded {
+	margin-left: 1em;
+	margin-right: 1em;
+}

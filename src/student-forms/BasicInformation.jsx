@@ -1,59 +1,64 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import {TextField,RaisedButton,FlatButton,Divider,RadioButtonGroup,RadioButton,Snackbar} from 'material-ui';
 
 class BasicInformation extends Component {
+	constructor(props) {
+    super(props);
+    this.state = {
+    	gender: "male",
+      showSS: true
+    };
+    this.onRadioChange = this.onRadioChange.bind(this);
+  }
+
+  onRadioChange(event) {
+  	console.log(event.target.value)
+    this.setState({
+    	gender: event.target.value==="male"?"male":"female",
+      showSS: event.target.value==="male"?true:false
+    });
+  }
+
 	render() {
 		return (
-			<div className="container">
-			<div className="panel panel-default">
-			<div className="panel-body">
+			<div>
+				<TextField
+          hintText="First Name"
+          floatingLabelText="First Name"
+          type="name"
+        /><br/>
+        <TextField
+          hintText="Last Name"
+          floatingLabelText="Last Name"
+          type="name"
+        /><br/>
 
-			<div className="row">
-			<div className="col-md-2">
-			<br/>
-			<br/>
-			<span className="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+				<h4>Gender</h4>
+				<div className="radio">
+					<label>
+					<input type="radio" name="optionsGender" id="male" value="male"
+									checked={this.state.gender === "male"} 
+                  onChange={this.onRadioChange}/>
+            Male</label>
+				</div>
 
-			</div>
-			<div className="col-md-8"><h1>Basic contact information</h1>
-			<br/>
-			<br/>
-			<form>
-			<div className="form-group">
-			<label className="control-label" for="fname">First Name</label>
-			<input className="form-control" id="fname" name="fname" placeholder="your first name" type="text"/>
-			</div> <br/>
-
-			<div className="form-group">
-			<label className="control-label" for="lname">Last Name</label>
-			<input className="form-control" id="lname" name="lname" placeholder="your Last name" type="text"/>
-			</div> <br/>
-
-
-			<label className="control-label" for="gender">Gender</label>
-			<div className="radio">
-			<label><input type="radio" name="optionsGender" id="male" value="male"/>Male</label>
-			</div>
-
-			<div className="radio">
-			<label><input type="radio" name="optionsGender" id="female" value="female" checked/>Female</label>
-			</div> <br/>
-
-			<div id="serviceSystem"><p>You have to register with the Selective Service System.</p></div>
-
-			</form>
+				<div className="radio">
+					<label>
+						<input type="radio" name="optionsGender" id="female" value="female"
+										checked={this.state.gender === "female"} 
+                    onChange={this.onRadioChange}/>
+						Female</label>
+				</div> 
+				<br/>
+				
+				{
+					this.state.showSS?
+					<div><h4>You have to <a href="http://www.google.com">register</a> with the Selective Service System.</h4></div>
+					:
+					<div></div>	
+				}
 
 			</div>
-			<div className="col-md-2"><span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-			</div>
-
-
-			</div>
-
-			</div>
-			</div>
-			</div>
-
 			);
 	}
 }
