@@ -2,57 +2,111 @@ import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router'
 
 class Residency extends Component {
-	render() {
-		return (
-			<div className="container">
-			<div className="panel panel-default">
-			<div className="panel-body">
+	constructor(props) {
+    super(props);
+    this.state = {
+      status: "citizen",
+      showInt: false,
+      showSocial: true,
+    };
+    this.onRadioChange = this.onRadioChange.bind(this);
+  }
 
-			<div className="row">
-			<div className="col-md-2">
-			<br/>
-			<br/>
-			<a href="contactDetails.html"><span className="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+  onRadioChange(event) {
+    this.setState({
+      status: event.target.value
+    });
 
-			</div>
-			<div className="col-md-8"><h1>Residency Status</h1>
-			<br/>
-			<br/>
-			<form>
-			<label className="control-label" for="international-toggle">What is your residency status?</label>
-			<div className="radio">
-			<label><input type="radio" name="international-toggle" id="citizen" value="citizen"/>US Citizen</label>
-			</div>
+    if(this.state.status==="nonResident"){
+      this.setState({
+        showInt: true,
+        showSocial: false
+      });
+    }else{
+      this.setState({
+        showInt: false,
+        showSocial: true
+      })
+    }
+  }
 
-			<div className="radio">
-			<label><input type="radio" name="international-toggle" id="resident" value="resident" checked/>Legal US Resident</label>
-			</div>
+  render() {
+    return (
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <div className="row">
 
-			<div className="radio">
-			<label><input type="radio" name="international-toggle" id="nonResident" value="nonResident" checked/>Non-resident</label>
-			</div> <br>
+              <div className="col-md-2">
+                <a href="contactDetails.html"><span className="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+              </div>
 
-			<div title="A unique seven-, eight- or nine-digit number assigned to a noncitizen at the time his or her A-file is created" className="international-group"> 
-			<label className="control-label" for="alienNumber">Your Alien Registration number</label>
-			<input className="form-control" name="alienNumber" placeholder="A XXXX" type="text"/>
-			</div> <br>
+              <div className="col-md-8">
+                <h1>Residency Status</h1>
+                <form>
+                  <label className="control-label" form="international-toggle">What is your residency status?</label>
+                  <div className="radio">
+                    <label>
+                      <input  type="radio" name="international-toggle" id="citizen" value="citizen"
+                              checked={this.state.status === "citizen"} 
+                              onChange={this.onRadioChange}
+                              />
+                      US Citizen
+                    </label>
+                  </div>
 
-			<div title="Your social security number"> 
-			<label className="control-label" for="ssn">Your Social Security Number</label>
-			<input className="form-control" name="ssn" placeholder="XXX-XX-XXXX" type="text"/>
-			</div> <br>
-			</form>
+                  <div className="radio">
+                    <label>
+                      <input  type="radio" name="international-toggle" id="resident" value="resident"
+                              checked={this.state.status === "resident"} 
+                              onChange={this.onRadioChange}
+                              />
+                      Legal US Resident
+                    </label>
+                  </div>
 
-			</div>
-			<div className="col-md-2"><span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
-			</div>
+                  <div className="radio">
+                    <label>
+                      <input  type="radio" name="international-toggle" id="nonResident" value="nonResident"
+                              checked={this.state.status === "nonResident"} 
+                              onChange={this.onRadioChange}
+                              />
+                      Non-resident
+                    </label>
+                  </div> 
+                  <br/>
 
-			</div>
-			</div>
-			</div>
+                  {
+                    this.state.showInt?
+                    <div title="A unique seven-, eight- or nine-digit number assigned to a noncitizen at the time his or her A-file is created" className="international-group"> 
+                    <label className="control-label" form="alienNumber">Your Alien Registration number</label>
+                    <input className="form-control" name="alienNumber" placeholder="A XXXX" type="text"/>
+                    </div>
+                    :
+                    <div></div> 
+                  }
+                  
+                  {
+                    this.state.showSocial?
+                    <div title="Your social security number"> 
+                    <label className="control-label" form="ssn">Your Social Security Number</label>
+                    <input className="form-control" name="ssn" placeholder="XXX-XX-XXXX" type="text"/>
+                    </div>
+                    :
+                    <div></div> 
+                  }
+                
+                </form>
+              </div>
 
-			);
-	}
+              <div className="col-md-2"><span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      );
+  }
 }
 
 export default Residency;
